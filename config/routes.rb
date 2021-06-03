@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  # 検索アクションへ
+  get '/search' => 'search#search'
   devise_for :users
 
   root 'homes#top'
