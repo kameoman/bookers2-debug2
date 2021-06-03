@@ -10,6 +10,7 @@
   </tr>
     <tr>
 	  <th>follows</th>
+	  <!--ユーザーのフォローの数を表示と覚えて記述を書いて、[user, :followings]へリンクしuser_idを貰ってfollowingsのshowへ行く-->
 	  <th><%= link_to user.followings.count,  [user, :followings]%></th>
   </tr>
     <tr>
