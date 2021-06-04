@@ -1,0 +1,10 @@
+<% if current_user.already_favorited?(book) %>
+    <%= link_to  book_favorites_path(book),method: :delete, remote:true do %>
+      <i class="far fa-thumbs-up"></i>
+    <% end %>
+<% else %>
+    <%= link_to  book_favorites_path(book),method: :post, remote:true do%>
+      <i class="far fa-thumbs-up"></i>
+    <% end %>
+<% end %>
+   <%= book.favorites.count%>

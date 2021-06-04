@@ -1,12 +1,14 @@
 class FavoritesController < ApplicationController
-  
+
   def create
+    @book = Book.find(params[:book_id])
     # 現在のユーザーに基づいた良いねを作成するよという意味です。book_idは良いねをした記事はどれなのかを取ってくるもの
     @favorite = current_user.favorites.create(book_id: params[:book_id])
-    # その場に遷移させる
-    redirect_back(fallback_location: root_path)
+
+    @favorite.save
+
   end
-  
+
   def destroy
     # どの投稿のいいねか対象を見つけてくる
     @book = Book.find(params[:book_id])
@@ -14,6 +16,6 @@ class FavoritesController < ApplicationController
     @favorite = current_user.favorites.find_by(book_id:@book.id)
     # いいねをしたというレコードを削除する
     @favorite.destroy
-    redirect_back(fallback_location: root_path)
+
   end
 end

@@ -19,18 +19,10 @@
           <td><%= @book.body %></td>
 
           <td>
-           <% if current_user.already_favorited?(@book) %>
-                         <%= link_to  book_favorites_path(@book),method: :delete do %>
-                         <i class="far fa-thumbs-up"></i>
-                         <% end %>
-                        <% else %>
-                         <%= link_to  book_favorites_path(@book),method: :post do%>
-                         <i class="far fa-thumbs-up"></i>
-                        <% end %>
-                        <% end %>
-                        <%= @book.favorites.count%>
-                      </td>
-
+            <!--↓非同期いいね-->
+               <div id="favorite-<%= @book.id %>">
+                  <%= render 'books/favorites', book: @book %>
+               </div></td>
             <% if @book_user.id == current_user.id %>
             <td><%= link_to 'Edit', edit_book_path(@book), class: "btn btn-sm btn-success edit_book_#{@book.id}" %></td>
             <td><%= link_to 'Destroy', book_path(@book), method: :delete, data: { confirm: '本当に削除しますか？' }, class: "btn btn-sm btn-danger destroy_book_#{@book.id}"%></td>
