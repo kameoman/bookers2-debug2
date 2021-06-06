@@ -4,16 +4,25 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @books = @user.books
+    @user_today_books = Book.where(user_id: current_user.id).where(created_at: Time.zone.now.all_day)
+    @user_yesterday_books = Book.where(user_id: current_user.id).where(created_at: 1.day.ago.all_day)
     @book = Book.new
+
+    to = Time.current.at_end_of_day
+    from = (to - 6.day).at_beginning_of_day
+
+    @user_thisweek = Book.where(user_id: current_user.id).where(created_at: from...to)
+    @user_lastweek = Book.where(user_id: current_user.id).where(created_at: (from - 6.day)...(to - 6.day))
+
   end
 
   def index
     @users = User.all
     @book = Book.new
     @books = Book.all
-    
+
   end
-  
+
   def edit
     @user = User.find(params[:id])
   end
@@ -38,5 +47,5 @@ class UsersController < ApplicationController
       redirect_to user_path(current_user)
     end
   end
-  
+
 end
