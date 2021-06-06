@@ -22,55 +22,7 @@
 
       <%= render 'books/index',books: @books %>
 
-            <table class="table table-bordered">
-      <h2 style="font-weight: normal;">投稿数の前日比・前週比</h2>
-        <thead>
-          <th>今日の投稿数</th>
-          <th>前日の投稿数</th>
-          <th>前日比</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td>
-              <%= @user_today_books.count %>
-            </td>
-            <td>
-              <%= @user_yesterday_books.count %>
-            </td>
-            <td>
-              <% if @user_yesterday_books.count == 0 %>
-                  前日までの投稿が0のため計測不可
-              <% else %>
-              　<% @day_before = @user_today_books.count / @user_yesterday_books.count.to_f  %>
-              　<%= (@day_before * 100).round %>%
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-
-
-      <table class="table table-bordered">
-        <thead>
-          <th>今週の投稿数</th>
-          <th>先週の投稿数</th>
-          <th>前週比</th>
-        </thead>
-        <tbody>
-          <tr>
-            <td><%= @user_thisweek.count %></td>
-            <td><%= @user_lastweek.count %></td>
-            <td>
-              <% if @user_lastweek.count == 0 %>
-                  前週までの投稿が0のため計測不可
-              <% else %>
-                <% @week_before = @user_thisweek.count / @user_lastweek.count.to_f  %>
-                <%= (@week_before * 100).round %>%
-              <% end %>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <%= render 'users/book_index',books: @books %>
 
     </div>
 
