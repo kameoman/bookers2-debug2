@@ -13,10 +13,11 @@ Rails.application.routes.draw do
   end
 
   resources :users,only: [:show,:index,:edit,:update] do
+    get "search", to: "users#search"
     resource :follow
     resource :followings
     resource :followers
-    
+
   end
 
 
